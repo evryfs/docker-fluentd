@@ -1,14 +1,2 @@
-FROM fluent/fluentd:v1.7.4-debian-1.0
-USER root
-RUN buildDeps="sudo make gcc g++ libc-dev" \
- && apt-get update \
- && apt-get install -y --no-install-recommends $buildDeps \
- && sudo gem install remote_syslog fluent-plugin-record-modifier fluent-plugin-prometheus fluent-plugin-in_http_healthcheck fluent-plugin-http \
- && sudo gem sources --clear-all \
- && SUDO_FORCE_REMOVE=yes \
-    apt-get purge -y --auto-remove \
-                  -o APT::AutoRemove::RecommendsImportant=false \
-                  $buildDeps \
- && rm -rf /var/lib/apt/lists/* \
- && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
-USER fluent
+FROM docker.io/bitnami/fluentd:1.7.4-debian-9-r13
+RUN gem install fluent-plugin-remote_syslog fluent-plugin-record-modifier
