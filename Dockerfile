@@ -3,7 +3,7 @@ USER root
 RUN buildDeps="sudo make gcc g++ libc-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
- && sudo gem install remote_syslog fluent-plugin-record-modifier fluent-plugin-prometheus \
+ && sudo gem install remote_syslog fluent-plugin-record-modifier fluent-plugin-prometheus fluent-plugin-in_http_healthcheck \
  && sudo gem sources --clear-all \
  && SUDO_FORCE_REMOVE=yes \
     apt-get purge -y --auto-remove \
